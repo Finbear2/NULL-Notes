@@ -1,0 +1,61 @@
+:root {
+  /* ========== Neutrals ========== */
+  --neutral-100: rgb(255, 255, 255);
+  --neutral-200: rgb(245, 245, 240);
+  --neutral-300: rgb(236, 236, 229);
+  --neutral-400: rgb(228, 228, 221);
+  --neutral-500: rgb(219, 219, 211);
+  --neutral-600: rgb(208, 208, 201);
+  --neutral-700: rgb(186, 186, 180);
+  --neutral-800: rgb(157, 157, 151);
+  --neutral-900: rgb(130, 130, 125);
+  --neutral-1000: rgb(101, 101, 97);
+  --neutral-1100: rgb(68, 68, 65);
+  --neutral-1200: rgb(35, 35, 34);
+
+  /* ========== Greens ========== */
+  --green-100: rgb(242, 255, 241);
+  --green-200: rgb(230, 243, 228);
+  --green-300: rgb(219, 234, 217);
+  --green-400: rgb(212, 226, 210);
+  --green-500: rgb(203, 217, 200);
+  --green-600: rgb(195, 206, 193);
+  --green-700: rgb(181, 192, 179);
+  --green-800: rgb(148, 157, 146);
+  --green-900: rgb(126, 134, 124);
+  --green-1000: rgb(107, 114, 105);
+  --green-1100: rgb(81, 86, 80);
+  --green-1200: rgb(59, 63, 58);
+
+  /* ========== Accent Colors ========== */
+  --yellow-500: rgb(243, 238, 72);
+  --bright-green-500: rgb(109, 194, 100);
+  --red-500: rgb(210, 118, 118);
+
+  /* ========== Typography: Base ========== */
+  --font-family-base: "DM Sans", sans-serif;
+  --font-size-body: 16px;
+  --font-weight-body: 400;
+  --line-height-body: 1.2;
+  --letter-spacing-body: 0;
+
+  /* ========== Typography: Headings ========== */
+  --font-h1-size: 60px;
+  --font-weight-h1: 700;
+  --line-height-h1: 1.2;
+
+  --font-h2-size: 45px;
+  --font-weight-h2: 700;
+  --line-height-h2: 1.2;
+
+  --font-h3-size: 35px;
+  --font-weight-h3: 700;
+  --line-height-h3: 1.2;
+
+  /* ========== Typography: Italic ========== */
+  --font-weight-italic: 400;
+  --font-weight-bold: 600;
+  --font-weight-italic-bold: 600;
+
+  --light-shadow: rgba(189, 189, 189, 0.733);
+}

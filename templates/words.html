@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>NULL Notes - Words</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='tokens.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+
+</head>
+<body>
+    <div class="background" style="left: 244px; width: calc(100vw - 244px);">
+        <h1 style="width: calc(100vw - 244px); text-align: center;">Words</h1>
+        <div class="center-horizontal">
+            <input type="text" id="search" placeholder="Google for your mind..."/>
+        </div>
+        <div class="grid">
+            {% for word, wordObj in words.items() %}
+                <div class="card">
+                    <h3>{{ word }}</h3>
+                    <ul>
+                        {% for note in wordObj.notes %}
+                            <li>{{ note }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% include "sidebar.html" %}
+</body>
+<script src="{{ url_for('static', filename='index.js') }}"></script>
+</html>
