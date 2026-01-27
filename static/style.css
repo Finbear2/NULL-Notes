@@ -146,6 +146,7 @@ h1 {
     left: 0;
     height: 100vh;
     overflow-y: auto;
+    overflow-x: hidden;
     width: 100vw;
     background-color: var(--neutral-100);
     display: block;

@@ -1,11 +1,12 @@
 **Working On**
-- [ ] Fix UI for word menu
+- [ ] Creation menu
 
 **Today**
 - [x] Singular indexing
 - [x] Get it on Github
 
 **This week**
+- [x] Fix UI for word menu
 - [x] Fix the singular indexing algorithm
 - [x] Word linking view / full preview view
   - [ ] Make tooltip stuff
@@ -13,10 +14,7 @@
   - [ ] Make preview switch button
 - [ ] SQL Lite integration
 - [ ] Better UI
-- [ ] Creation menu
 - [ ] Fix the weird checkbox preview
-- [ ] Add home menu
-- [ ] Add note menu
 
 **This month**
 - [ ] Optimization

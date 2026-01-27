@@ -13,7 +13,7 @@ def wordsPage():
     return render_template("words.html", words = words)   
 
 @app.route("/notes/", methods=["GET", "POST"])
-def home():
+def notesPage():
     return render_template("notes.html", notes = notes)
 
 @app.route("/preview/<noteName>/", methods=["GET", "POST"])
