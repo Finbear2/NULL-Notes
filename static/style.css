@@ -185,3 +185,10 @@ h1 {
 .EasyMDEContainer .CodeMirror {
   height: calc(100vh - 100px);
 }
+
+.uniqeWord {
+
+    text-decoration: underline;
+    text-decoration-color: var(--green-900);
+
+}

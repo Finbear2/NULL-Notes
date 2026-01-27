@@ -47,7 +47,6 @@ let autosaveTimeout;
 function autosave() {
     
     clearTimeout(autosaveTimeout);
-
     
     autosaveTimeout = setTimeout(() => {
         const content = easyMDE.value();
@@ -62,7 +61,7 @@ function autosave() {
         .then(data => console.log("Autosaved at", new Date().toLocaleTimeString()))
         .catch(err => console.error("Autosave failed", err));
 
-    }, 1500);
+    }, 500);
 }
 
 easyMDE.codemirror.on("change", autosave);

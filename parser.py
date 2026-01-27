@@ -1,15 +1,35 @@
+from fileLoader import loadStopwords
+from markupsafe import Markup
+from utils import normalizeWord
+import markdown
 import string
-
-def normalizeWord(word):
+import re
+   
+def highlightHtml(text):
     
-    word = word.lower()
-    word = word.strip(string.digits)
-    word = word.strip(string.punctuation)
+    bufferWords = loadStopwords()
     
-    if len(word) <= 3:
-        return None
-    else:
-        return word
+    words = []
+    
+    parsedText = re.split(r'(\b[a-zA-Z]+\b)', text)
+    
+    for word in parsedText:
+        
+        wordNorm = normalizeWord(word)
+        
+        if wordNorm is not None and wordNorm.isalpha() and wordNorm not in bufferWords:
+            
+            words.append(f'<span class="uniqeWord"><i><b>{word}</b></i></span>')
+            
+        else:
+            
+            words.append(word)
+            
+    text = "".join(map(str, words))
+    
+    html = markdown.markdown(text, extensions=['extra'])
+    
+    return Markup(html)
     
 # Function to clean text
 def cleanText(text, bufferWords):
@@ -26,7 +46,7 @@ def cleanText(text, bufferWords):
             
             word = normalizeWord(word)
             
-            if word:
+            if word is not None:
                 if word not in bufferWords:
                     words.add(word)  
                         

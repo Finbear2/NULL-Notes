@@ -15,20 +15,25 @@ This is the defenition of spaggetti code. This should be an example of how not t
 
 ### ToDo's
 ---
+**Working On**
+- [ ] Fix UI for word menu
+
 **Today**
 - [x] Singular indexing
-- [ ] Get it on Github
+- [x] Get it on Github
 
 **This week**
+- [x] Fix the singular indexing algorithm
+- [x] Word linking view / full preview view
+  - [ ] Make tooltip stuff
+  - [ ] Make uniqe word page
+  - [ ] Make preview switch button
 - [ ] SQL Lite integration
-- [ ] Word linking view / full preview view
 - [ ] Better UI
 - [ ] Creation menu
 - [ ] Fix the weird checkbox preview
 - [ ] Add home menu
 - [ ] Add note menu
-- [ ] Fix UI for word menu
-- [ ] Fix the singular indexing algorithm
 
 **This month**
 - [ ] Optimization

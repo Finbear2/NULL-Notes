@@ -1,8 +1,5 @@
 from parser import cleanText
-
-def load_stopwords(path="stopwords.txt") -> set:
-    with open(path, encoding="utf-8") as f:
-        return {line.strip() for line in f if line.strip()}
+from fileLoader import loadStopwords
 
 class Word:
     
@@ -18,4 +15,4 @@ class Note:
         
         self.name = name
         self.text = text
-        self.words = cleanText(text, load_stopwords())
+        self.words = cleanText(text, loadStopwords())

@@ -1,5 +1,8 @@
 from flask import Flask, render_template, request, redirect, url_for, jsonify
 from indexer import *
+from parser import *
+import markdown
+import re
 
 notes, words = index()
 
@@ -12,6 +15,20 @@ def wordsPage():
 @app.route("/notes/", methods=["GET", "POST"])
 def home():
     return render_template("notes.html", notes = notes)
+
+@app.route("/preview/<noteName>/", methods=["GET", "POST"])
+def preview(noteName):
+    
+    global notes, words
+    
+    if noteName not in notes:
+        return "This note is NULL (Not Found)", 404
+    
+    note = notes[noteName]
+    
+    htmlText = highlightHtml(note.text)
+    
+    return render_template("preview.html", noteText=htmlText )
 
 @app.route("/edit/<noteName>/", methods=["GET", "POST"])
 def edit(noteName):

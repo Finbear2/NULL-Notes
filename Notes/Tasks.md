@@ -1,23 +1,28 @@
-### Today
-- [x] Singular indexing
-- [ ] Get it on Github
+**Working On**
+- [ ] Fix UI for word menu
 
-### This week
+**Today**
+- [x] Singular indexing
+- [x] Get it on Github
+
+**This week**
+- [x] Fix the singular indexing algorithm
+- [x] Word linking view / full preview view
+  - [ ] Make tooltip stuff
+  - [ ] Make uniqe word page
+  - [ ] Make preview switch button
 - [ ] SQL Lite integration
-- [ ] Word linking view / full preview view
 - [ ] Better UI
 - [ ] Creation menu
 - [ ] Fix the weird checkbox preview
 - [ ] Add home menu
 - [ ] Add note menu
-- [ ] Fix UI for word menu
-- [ ] Fix the singular indexing algorithm
 
-### This month
+**This month**
 - [ ] Optimization
 - [ ] Make it fully useable 
 - [ ] Build docker version
 	- [ ] Try self hosting on pi 4
 
-### Overall
+**Overall**
 - [ ] Improve stopword list
