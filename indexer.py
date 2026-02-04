@@ -3,12 +3,12 @@ from models import Word
 from models import Note
 import inspect
 
-notesFolder = Path("Notes")
-
-def index():
+def index(user):
     
     Notes = dict()
     Words = dict()
+    
+    notesFolder = Path(f"Notes/{user.name}")
     
     for file in notesFolder.glob("*.md"):
         
@@ -29,7 +29,9 @@ def index():
                         
     return Notes, Words
         
-def indexSingular(Notes, Words, Filename):
+def indexSingular(Notes, Words, Filename, User):
+    
+    notesFolder = Path(f"Notes/{User.name}")
     
     notesTry = Notes.get(Filename)      
     

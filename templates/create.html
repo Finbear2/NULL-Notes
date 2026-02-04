@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create New Note</title>
+
+    {% include "imports.html" %}
+
+</head>
+<body>
+    <div class="background" style="left: 244px; width: calc(100vw - 244px);">
+
+        <div class="center-horizontal">
+            <div class="column" style="gap: 20px;">
+                <form method="post">  
+                    <textarea id="name" name="name" placeholder="Note name" style="height: calc(100vh - 50px);"></textarea>  
+                    <button id="submit" type="submit">Create Note</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    {% include "sidebar.html" %}
+</body>
+</html>

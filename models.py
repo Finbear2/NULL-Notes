@@ -1,6 +1,12 @@
 from parser import cleanText
 from fileLoader import loadStopwords
 
+class User:
+    
+    def __init__(self, username):
+        self.name = username
+        self.notes = {}
+        self.words = {}
 class Word:
     
     def __init__(self, name, tags, note):

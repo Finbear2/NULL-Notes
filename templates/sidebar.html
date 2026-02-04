@@ -22,9 +22,9 @@
                 <p style="margin: 0;"><b>NULL</b></p>
             </div>
             <div class="column" style="align-items: center; gap: 5px;">
-                <button onclick="window.location.href='{{ url_for('notesPage') }}'" id="sidebar-button"><span class="material-symbols-outlined">home</span> Home</button>
-                <button onclick="window.location.href='{{ url_for('notesPage') }}'" id="sidebar-button"><span class="material-symbols-outlined">note_stack</span> Notes</button>
-                <button onclick="window.location.href='{{ url_for('wordsPage') }}'" id="sidebar-button"><span class="material-symbols-outlined">dictionary</span> Words</button>
+                <button onclick="window.location.href='{{ url_for('notesPage', user=user.name) }}'" id="sidebar-button"><span class="material-symbols-outlined">home</span> Home</button>
+                <button onclick="window.location.href='{{ url_for('notesPage', user=user.name) }}'" id="sidebar-button"><span class="material-symbols-outlined">note_stack</span> Notes</button>
+                <button onclick="window.location.href='{{ url_for('wordsPage', user=user.name) }}'" id="sidebar-button"><span class="material-symbols-outlined">dictionary</span> Words</button>
                 <div class="column" style="align-items: center; gap: 5px;"
                     
                 </div>
