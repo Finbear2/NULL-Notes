@@ -1,3 +1,6 @@
+const height = (window.innerHeight - 110) + "px";
+let autosaveTimeout;
+
 const easyMDE = new EasyMDE({
     element: document.getElementById("text"),
     toolbar: [
@@ -22,9 +25,7 @@ const easyMDE = new EasyMDE({
         "code",
         "quote",
         "unordered-list",
-        "ordered-list",
-        "|",
-        "preview"
+        "ordered-list"
     ],
     renderingConfig: {
         singleLineBreaks: false,
@@ -38,11 +39,11 @@ const easyMDE = new EasyMDE({
     indentWithTabs: true,
     placeholder: "NULL",
     spellChecker: false,            
-    lineWrapping: true,             
-    forceSync: true,                
+    lineWrapping: true,  
+    inputStyle: "contenteditable",           
+    forceSync: true,
+    maxHeight: height                
 });
-
-let autosaveTimeout;
 
 function autosave() {
     

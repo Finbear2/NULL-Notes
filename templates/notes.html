@@ -19,7 +19,7 @@
                 </div>
                 <div class="grid">
                     {% for filename, note in notes.items() %}
-                        <div class="note-card" data-hidden-text="{{ note.name | replace(' ', '_') }}">
+                        <a href="/{{ user.name }}/preview/{{ note.name }}/" class="note-card" data-hidden-text="{{ note.name | replace(' ', '_') }}">
                             <h3 style="margin-left: 5px;">{{ (note.name | replace('_', ' '))[:-3] }}</h3>
                             <ul style="font-size: 1px; position: fixed; x: 50; y: 0; color: #ecffc900;">
                                 {% for word in note.words %}
@@ -35,7 +35,7 @@
                                 <li>...</li>
                             </ul>
                             <div class="icon" style="position: absolute; right: 5px; bottom: 5px; border-radius: 8px; box-shadow: none;">F</div>     
-                        </div>
+                        </a>
                     {% endfor %}
                 </div>
             </div>
@@ -43,5 +43,5 @@
     </div>
     {% include "sidebar.html" %}
 </body>
-<script src="{{ url_for('static', filename='notes.js') }}"></script>
+<script src="{{ url_for('static', filename='js/search.js') }}"></script>
 </html>

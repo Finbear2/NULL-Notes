@@ -11,7 +11,9 @@
     <div class="background" style="left: 244px; width: calc(100vw - 244px);">
         <div style="margin: 30px;">{{ noteText }}</div>
     </div>
+
+    <button onclick="window.location.href='{{ url_for('edit', user=user.name, noteName=noteName) }}'" style="position: absolute; right: 50px; bottom: 75px;">Edit</button>
+
     {% include "sidebar.html" %}
 </body>
-<script src="{{ url_for('static', filename='index.js') }}"></script>
 </html>
