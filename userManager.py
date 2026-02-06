@@ -39,7 +39,10 @@ def getUser(name):
     
     if userNames:
         if isinstance(name, str):
-            return users[name]
+            if name in userNames:
+                return users[name]
+            else:
+                return None
         else:
             return name
     else:

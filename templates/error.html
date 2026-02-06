@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Error {{ number }}</title>
+
+    {% include "imports.html" %}
+
+</head>
+<body>
+    <div style="margin: 20px;">
+        <h1>There's an error among us...</h1>
+        <p><b>{{ number }}</b><br/>{{ message }}</p>
+    </div>
+</body>
+</html>

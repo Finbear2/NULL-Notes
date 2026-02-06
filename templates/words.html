@@ -9,25 +9,27 @@
 </head>
 <body>
     <div class="background" style="left: 244px; width: calc(100vw - 244px);">
-        <div class="center-horizontal">
-            <div class="column" style="gap: 20px;">
-                <div class="center-horizontal">
-                    <div class="column">
-                        <h1 style="width: 100; text-align: center; margin-bottom: 0px;">Words</h1>
-                        <input type="text" id="search" placeholder="Google for your mind..."/>
-                    </div>
-                </div>
-                <div class="grid">
-                    {% for word, wordObj in words.items() %}
-                        <div class="note-card">
-                            <h3>{{ word }}</h3>
-                            <ul>
-                                {% for note in wordObj.notes %}
-                                    <li>{{ note }}</li>
-                                {% endfor %}
-                            </ul>
+        <div style="margin: 20px;">
+            <div class="center-horizontal">
+                <div class="column" style="gap: 20px;">
+                    <div class="center-horizontal">
+                        <div class="column">
+                            <h1 style="width: 100; text-align: center; margin-bottom: 0px;">Words</h1>
+                            <input type="text" id="search" placeholder="Google for your mind..."/>
                         </div>
-                    {% endfor %}
+                    </div>
+                    <div class="grid">
+                        {% for word, wordObj in words.items() %}
+                            <a href="/{{ user.name }}/words/{{ word.lower() }}/" class="note-card">
+                                <h3>{{ word }}</h3>
+                                <ul>
+                                    {% for note in wordObj.notes %}
+                                        <li>{{ note }}</li>
+                                    {% endfor %}
+                                </ul>
+                            </a>
+                        {% endfor %}
+                    </div>
                 </div>
             </div>
         </div>

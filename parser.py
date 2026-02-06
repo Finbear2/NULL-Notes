@@ -1,3 +1,4 @@
+from flask import url_for
 from fileLoader import loadStopwords
 from markupsafe import Markup
 from utils import normalizeWord
@@ -5,7 +6,7 @@ import markdown
 import string
 import re
    
-def highlightHtml(text):
+def highlightHtml(text, user):
     
     bufferWords = loadStopwords()
     
@@ -15,11 +16,15 @@ def highlightHtml(text):
     
     for word in parsedText:
         
-        wordNorm = normalizeWord(word)
+        if word != "\n":
+            wordNorm = normalizeWord(word)
+        else:
+            wordNorm = "<br/>"
         
         if wordNorm is not None and wordNorm.isalpha() and wordNorm not in bufferWords:
             
-            words.append(f'<span class="uniqeWord"><i><b>{word}</b></i></span>')
+            url = url_for('wordPage', user=user.name, word=word.lower())
+            words.append(f'<a href="{url}" class="uniqeWord"><i><b>{word}</b></i></a>')
             
         else:
             
@@ -27,7 +32,7 @@ def highlightHtml(text):
             
     text = "".join(map(str, words))
     
-    html = markdown.markdown(text, extensions=['extra'])
+    html = markdown.markdown(text, extensions=['extra', 'nl2br'])
     
     return Markup(html)
     

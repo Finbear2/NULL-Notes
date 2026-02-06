@@ -3,111 +3,168 @@ from userManager import *
 from indexer import *
 from parser import *
 
-# NOTES
-# - ALWAYS pass through the user so the sidebar can work
+'''
+NOTES:
+    - ALWAYS pass through the user so the sidebar can work
+    - Usernames is a SET
+    
+TASKS:
+    - [] Rework UI fully like EVERYTHING
+    - [] Import new color tokens from penpot
+    - [] Add comments everywhere
 
-# usernames is a set so you can only use in
+users:
+    "test":
+        name: "test"
+        notes:
+            "test.md"
+                name: "test.md"
+                text: "This is the text"
+                words:
+                    "text":
+                        name: "text"
+                        tags:
+                            [] or [insert tags here]
+                        notes:
+                            "testm.md": Links to test.md
+        words:
+            "text":
+                name: "text"
+                tags:
+                    [] or [insert tags here]
+                notes:
+                    "testm.md": Links to test.md
+'''
+
 users, userNames = createUsers()
 
 app = Flask(__name__)
 
-# Make word page
+# Route words page
 @app.route("/<user>/words/", methods=["GET", "POST"])
 def wordsPage(user):
     user = getUser(user)
     
-    if user.name not in userNames:
-        return "User not found", 404
-    else:
+    if user:
         return render_template("words.html", words = user.words, user=user)   
+    else:
+        return render_template("error.html", message="User not found, try a different user or make sure you've spelt it correctly if typing url manually.", number="404")
 
-# Make notes page
+# Route notes page
 @app.route("/<user>/notes/", methods=["GET", "POST"])
 def notesPage(user):
     user = getUser(user)
     
-    if user.name in userNames:
+    if user:
         return render_template("notes.html", notes=user.notes, user=user)
     else:
-        return "User not found", 404
+        return render_template("error.html", message="User not found, try a different user or make sure you've spelt it correctly if typing url manually.", number="404")
 
-# Make note creation page
+
+@app.route("/<user>/words/<word>/", methods=["GET", "POST"])
+def wordPage(user, word):
+    user=getUser(user)
+    
+    if user:
+        if word in user.words:
+            word = user.words[word]
+            return render_template("word.html", user=user, word=word)
+        else:
+            return render_template("error.html", message="Word not found, try a different going back and selecting it again or make sure you've spelt it correctly if typing url manually.", number="404")
+    else:
+        return render_template("error.html", message="User not found, try a different going back and selecting it again or make sure you've spelt it correctly if typing url manually.", number="404")
+
+# Route note creation page
 @app.route("/<user>/create/", methods=["GET", "POST"])
 def create(user):
     global users
     user = getUser(user)
     
-    if request.method == "POST":
+    if user:
+        # If user presses create note
+        if request.method == "POST":
+            
+            # Get the text
+            noteName = request.form.get("name", "")
+            # Replace the spaces with underscores so it will actually be a file name
+            noteName = noteName.replace(" ", "_")
+            
+            # Add .md
+            if not noteName.endswith(".md"):
+                noteName = f"{noteName}.md"
+            
+            if noteName in user.notes:
+                return render_template("error.html", message="Note name already exists, use a different name... please", number="404")
+            else:
+                with open(f"Notes/{user.name}/{noteName}", "w", encoding="utf-8") as file:
+                    # Give a nice message, maybe replace later but I'm liking its vibes
+                    file.write("EDIT ME :)")
+            
+            # Index it hehehehe
+            user.notes, user.words = indexSingular(user.notes, user.words, noteName, user)
+            
+            return redirect(url_for("edit", user=user.name, noteName=noteName))
         
-        # Get the text
-        noteName = request.form.get("name", "")
-        # Replace the spaces with underscores so it will actually be a file name
-        noteName = noteName.replace(" ", "_")
-        
-        if not noteName.endswith(".md"):
-            noteName = f"{noteName}.md"
-        
-        if noteName in user.notes:
-            return "A note with this name already exists!", 400
-        else:
-            with open(f"Notes/{user.name}/{noteName}", "w", encoding="utf-8") as file:
-                file.write("EDIT ME :)")
-        
-        user.notes, user.words = indexSingular(user.notes, user.words, noteName, user)
-        
-        return redirect(url_for("edit", user=user.name, noteName=noteName))
+        return render_template("create.html", user=user)
     
-    return render_template("create.html", user=user)
+    else:
+        
+        return render_template("error.html", message="User not found, try a different user or make sure you've spelt it correctly if typing url manually.", number="404")
 
-# Create full preview note page
+
+# Route preview page
 @app.route("/<user>/preview/<noteName>/", methods=["GET", "POST"])
 def preview(user, noteName):
     global users
     user = getUser(user)
     
-    if user.name in userNames:
-    
+    # Check if the user exists
+    if user:
         if noteName in user.notes:
-            note = user.notes[noteName]
+            note = user.notes[noteName] # Get note
             
-            htmlText = highlightHtml(note.text)
+            htmlText = highlightHtml(note.text, user) # Get the formated html code
     
             return render_template("preview.html", noteText=htmlText, user=user, noteName=noteName )    
         else:
-            return "This note is NULL (Not Found)", 404       
+            return render_template("error.html", message="Note not found, try a different going back and selecting it again or make sure you've spelt it correctly if typing url manually.", number="404")     
     else:
-        return "profile does not exist", 404
+        return render_template("error.html", message="User not found, try a different user or make sure you've spelt it correctly if typing url manually.", number="404")
     
-# Cretae an edit note page
+# Route edit page
 @app.route("/<user>/edit/<noteName>/", methods=["GET", "POST"])
 def edit(user, noteName):
     global users
     user = getUser(user)
-    
-    if request.method == "POST" and request.is_json:
         
-        data = request.get_json()
+    if user:
         
-        if data.get("autosave"):
+        if request.method == "POST" and request.is_json:
+        
+            data = request.get_json()
             
-            newText = data.get("text", "")
-            newText = newText.replace("\r\n", "\n")
+            if data.get("autosave"):
+                
+                # ISSUE somewhere here there's a bug with task bullet points
+                
+                newText = data.get("text", "") # Get the text
+                
+                # Write data
+                with open(f"Notes/{user.name}/{noteName}", "w", encoding="utf-8") as file:
+                    file.write(newText)
+                    
+                # Index it hehehehe
+                user.notes, user.words = indexSingular(user.notes, user.words, noteName, user)
+                    
+                return jsonify({"status": "ok"}) # Make sure the javascript doesn't freak out
             
-            with open(f"Notes/{user.name}/{noteName}", "w", encoding="utf-8") as file:
-                file.write(newText)
-                
-            user.notes, user.words = indexSingular(user.notes, user.words, noteName, user)
-                
-            return jsonify({"status": "ok"})
-        
-        
-    if user.name in userNames:
-        
-        if noteName not in user.notes:
-            return "This note is NULL (Not Found)", 404
-        else:
-            note = user.notes[noteName]
+        if noteName in user.notes:
+            note = user.notes[noteName] # Get note
             return render_template("edit.html", note=note, user=user, noteName=noteName)    
+        else:
+            return render_template("error.html", message="Note not found, try a different going back and selecting it again or make sure you've spelt it correctly if typing url manually.", number="404")
+    else:
+        return render_template("error.html", message="User not found, try a different user or make sure you've spelt it correctly if typing url manually.", number="404")
     
 # Run app main loop        
 if __name__ == "__main__":
