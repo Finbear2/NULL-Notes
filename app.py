@@ -56,6 +56,9 @@ def notesPage(user):
     user = getUser(user)
     
     if user:
+        if request.method == "POST":
+            user.notes, user.words = index(user)
+        
         return render_template("notes.html", notes=user.notes, user=user)
     else:
         return render_template("error.html", message="User not found, try a different user or make sure you've spelt it correctly if typing url manually.", number="404")
@@ -105,7 +108,7 @@ def create(user):
             
             return redirect(url_for("edit", user=user.name, noteName=noteName))
         
-        return render_template("create.html", user=user)
+        return render_template("create.html", notes=user.notes, user=user)
     
     else:
         

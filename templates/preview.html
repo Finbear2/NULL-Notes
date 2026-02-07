@@ -9,10 +9,17 @@
 </head>
 <body>
     <div class="background" style="left: 244px; width: calc(100vw - 244px);">
-        <div style="margin: 30px;">{{ noteText }}</div>
+        <div class="column">
+            <div class="topbar" style="z-index: 5;">
+                <div class="row">
+                    <button class="topbar-button" onclick="window.location.href='{{ url_for('edit', user=user.name, noteName=noteName) }}'">Edit</button>
+                </div>
+            </div>
+            <div style="margin: 30px;">{{ noteText }}</div>
+        </div>
     </div>
 
-    <button onclick="window.location.href='{{ url_for('edit', user=user.name, noteName=noteName) }}'" style="position: absolute; right: 50px; bottom: 75px;">Edit</button>
+    
 
     {% include "sidebar.html" %}
 </body>

@@ -9,4 +9,7 @@ def normalizeWord(word):
     if len(word) <= 3:
         return None
     else:
-        return word
+        if '"' in word or '(' in word or ')' in word or '[' in word or ']' in word or '/' in word or ':' in word:
+            return None
+        else:
+            return word

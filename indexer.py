@@ -63,9 +63,9 @@ def indexSingular(Notes, Words, Filename, User):
                     
                 else:
                     
-                    if "word" in globals() and inspect.isclass(Word):
-                    
-                        tag = "important" if word.startswith("!") else None
-                        Words[word] = Word(word, tag, file.name)       
+                    tag = "important" if word.startswith("!") else None
+                    Words[word] = Word(word, tag, file.name)   
+                        
+                            
                     
     return Notes, Words

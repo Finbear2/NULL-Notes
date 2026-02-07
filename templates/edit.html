@@ -13,14 +13,18 @@
 </head>
 <body>
     <div class="background" style="left: 244px; width: calc(100vw - 244px);">
-        
-        <form method="post">  
-            <textarea id="text" name="text" spellcheck="true" style="max-height: calc(100vh - 50px);">{{ note.text }}</textarea>  
-        </form>
+        <div class="column">
+            <div class="topbar" style="z-index: 5;">
+                <div class="row">
+                    <button class="topbar-button" onclick="window.location.href='{{ url_for('preview', user=user.name, noteName=noteName) }}'">Preview</button>
+                </div>
+            </div>
+            <form method="post">  
+                <textarea id="text" name="text" spellcheck="true" style="max-height: calc(100vh - 50px);">{{ note.text }}</textarea>  
+            </form>
+        </div>
     </div>
 
-    <button onclick="window.location.href='{{ url_for('preview', user=user.name, noteName=noteName) }}'" style="position: absolute; right: 50px; bottom: 75px;">Preview</button>
-    
     {% include "sidebar.html" %}
 </body>
 <script src="https://unpkg.com/easymde/dist/easymde.min.js"></script>

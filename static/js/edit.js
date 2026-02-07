@@ -1,4 +1,4 @@
-const height = (window.innerHeight - 110) + "px";
+const height = (window.innerHeight - 164) + "px";
 let autosaveTimeout;
 
 const easyMDE = new EasyMDE({

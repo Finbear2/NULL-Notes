@@ -9,41 +9,52 @@
 </head>
 <body>
     <div class="background" style="left: 244px; width: calc(100vw - 244px);">
-        <div style="margin: 20px;">
-            <div class="center-horizontal">
-                <div class="column" style="gap: 20px;">
-                    <div class="center-horizontal">
-                        <div class="column">
-                            <h1 style="width: 100; text-align: center; margin-bottom: 0px;">Notes</h1>
-                            <input type="text" id="search" placeholder="Google for your mind..."/>
+        <div class="column">
+            <div class="topbar" style="z-index: 5;">
+                <div class="row">
+                    <input type="text" id="search" placeholder="Search..."/>
+                    <button class="topbar-button" onclick="window.location.href='{{ url_for('create', user=user.name) }}'">Make New Note</button>
+                    <form method="post">
+                        <button class="topbar-button" id="submit" type="submit">Re-Index</button>
+                    </form>
+                </div>
+            </div>
+            <div style="margin: 20px;">
+                <div class="center-horizontal">
+                    <div class="column">
+                        <div class="center-horizontal">
+                            <div class="column">
+                                <h1 style="width: 100; text-align: center; margin-bottom: 0px;">Notes</h1>
+                            </div>
                         </div>
-                    </div>
-                    <div class="grid">
-                        {% for filename, note in notes.items() %}
-                            <a href="/{{ user.name }}/preview/{{ note.name }}/" class="note-card" data-hidden-text="{{ note.name | replace(' ', '_') }}">
-                                <h3 style="margin-left: 5px;">{{ (note.name | replace('_', ' '))[:-3] }}</h3>
-                                <ul style="font-size: 1px; position: fixed; x: 50; y: 0; color: #ecffc900;">
-                                    {% for word in note.words %}
-                                        <li>{{ word }}</li>
-                                    {% endfor %}
-                                </ul>
-                                <ul style="margin: 5px;">
-                                    {% for word in note.words %}
-                                        {% if 7 > loop.index %}
+                        <div class="grid">
+                            {% for filename, note in notes.items() %}
+                                <a href="/{{ user.name }}/preview/{{ note.name }}/" class="note-card" data-hidden-text="{{ note.name | replace(' ', '_') }}">
+                                    <div style="position: absolute; background-color: var(--green-500); x: 0; y: 0; width: 310px; height: 97px; "></div>
+                                    <h3 style="margin-left: 5px; position: relative; top: 100px; left: 10px;">{{ (note.name | replace('_', ' '))[:-3] }}</h3>
+                                    <ul style="font-size: 1px; position: fixed; x: 50; y: 0; color: #ecffc900;">
+                                        {% for word in note.words %}
                                             <li>{{ word }}</li>
-                                        {% endif %}
-                                    {% endfor %}
-                                    <li>...</li>
-                                </ul>
-                            </a>
-                        {% endfor %}
+                                        {% endfor %}
+                                    </ul>
+                                    <ul style="position: relative; top: 80px; left: -10pxpx;">
+                                        {% for word in note.words %}
+                                            {% if 4 > loop.index %}
+                                                <li>{{ word }}</li>
+                                            {% endif %}
+                                            {% if loop.index == 4 %}
+                                                <li>...</li>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </ul>
+                                </a>
+                            {% endfor %}
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-    <button onclick="window.location.href='{{ url_for('create', user=user.name) }}'" style="position: absolute; right: 50px; bottom: 50px;">Create</button>
 
     {% include "sidebar.html" %}
 </body>

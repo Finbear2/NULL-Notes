@@ -37,9 +37,9 @@ input {
     width: 360px;
     height: 37px;
     outline: none;
+    border: none;
+    margin: 7px;
     color: var(--green-1100);
-
-    box-shadow: var(--light-shadow) 0px 4px 15px;
 }
 
 p {
@@ -73,7 +73,7 @@ h1 {
     margin: 0px;
 }
 
-#sidebar-button {
+.sidebar-button {
     border-radius: 5px;
     background-color: var(--neutral-200);
     width: 210px;
@@ -90,11 +90,38 @@ h1 {
     transition: background-color 0.25s ease;
 }
 
-#sidebar-button:hover {
+.sidebar-button:hover {
     background-color: var(--neutral-400);
 }
 
-#sidebar-button:active {
+.sidebar-button:active {
+    transition: background-color 0.05s ease;
+    background-color: var(--neutral-600);
+}
+
+.topbar-button {
+    border-radius: 5px;
+    background-color: var(--neutral-200);
+    width: fit-content;
+    height: 37px;
+    justify-content: left;
+    justify-items: start;
+    align-items: start;
+    padding: 5px 15px;
+    margin: 7px;
+    border: none;
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--neutral-1200);
+    text-align: left;
+    transition: background-color 0.25s ease;
+}
+
+.topbar-button:hover {
+    background-color: var(--neutral-400);
+}
+
+.topbar-button:active {
     transition: background-color 0.05s ease;
     background-color: var(--neutral-600);
 }
@@ -110,17 +137,29 @@ h1 {
 
 .note-card {
     position: relative;
-    width: auto;
-    max-height: 245px;
+    width: 310px;
+    height: 245px;
     background-color: var(--neutral-200);
     border-radius: 20px;
-    padding: 10px 10px;
     box-shadow: var(--light-shadow) 0px 4px 10px;
     white-space: nowrap;
     overflow: hidden;
-    transition: 1s;
+    transition: 0.25s;
     text-decoration: none;
     color: var(--neutral-1200);
+}
+
+.note-card:hover {
+    background-color: var(--neutral-300);
+}
+
+.note-card:active {
+
+    transition: 0.06s;
+    translate: 0px 4px;
+    box-shadow: none;
+    background-color: var(--neutral-400);
+
 }
 
 .sidebar {
@@ -133,6 +172,17 @@ h1 {
     margin: 0px;
     padding: 0px;
     overflow-x: hidden;
+    background-color: var(--neutral-200);
+}
+
+.topbar {
+    width: calc(100vw);
+    height: 54px;
+    outline: 2px var(--neutral-400) solid;
+    margin: 0px;
+    padding: 0px;
+    overflow-x: hidden;
+    overflow-y: hidden;
     background-color: var(--neutral-200);
 }
 
@@ -201,5 +251,6 @@ h1 {
 
     text-decoration: underline;
     text-decoration-color: var(--green-900);
+    color: var(--green-900);
 
 }
