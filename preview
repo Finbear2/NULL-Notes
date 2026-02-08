@@ -123,6 +123,8 @@ def preview(user, noteName):
     global users
     user = getUser(user)
     
+    result=False
+
     # Check if the user exists
     if user:
         if noteName in user.notes:
@@ -130,7 +132,10 @@ def preview(user, noteName):
             
             htmlText = highlightHtml(note.text, user) # Get the formated html code
     
-            return render_template("preview.html", noteText=htmlText, user=user, noteName=noteName )    
+            if request.method == "POST":
+                result=True
+
+            return render_template("preview.html", noteText=htmlText, user=user, noteName=noteName, result=result )    
         else:
             return render_template("error.html", message="Note not found, try a different going back and selecting it again or make sure you've spelt it correctly if typing url manually.", number="404")     
     else:

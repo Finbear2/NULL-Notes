@@ -28,18 +28,45 @@ body {
     margin: 0px;
 }
 
-input {
+input[type="checkbox"] {
+    accent-color: var(--green-700);
+    width: 15px;
+    height: 15px;
+    transition: 0.25s;
+    border-radius: 75px;
+    opacity: 0.25;
+}
+
+input[type="checkbox"]:hover {
+    height: 17px;
+    width: 17px;
+}
+
+input[type="checkbox"]:checked {
+    opacity: 1;
+}
+
+input[type="text"] {
     border-radius: 50px;
     background-color: var(--green-400);
     text-align: center;
     font-size: var(--font-size-body);
     font-family: 'DM Sans', sans-serif;
-    width: 360px;
+    width: 100px;
     height: 37px;
     outline: none;
     border: none;
     margin: 7px;
     color: var(--green-1100);
+    transition: 0.25s ease-out;
+}
+
+input[type="text"]:hover {
+    background-color: var(--green-500);  
+}
+
+input[type="text"]:focus {
+    width: 360px; 
 }
 
 p {
@@ -73,6 +100,7 @@ h1 {
     margin: 0px;
 }
 
+/* These are your buttons */
 .sidebar-button {
     border-radius: 5px;
     background-color: var(--neutral-200);
@@ -126,14 +154,68 @@ h1 {
     background-color: var(--neutral-600);
 }
 
-.card {
-    width: auto;
-    height: auto;
-    background-color: var(--neutral-200);
-    outline: 3px #000000 dashed;
+.warning-button {
     border-radius: 10px;
-    padding: 10px 10px;
+    background-color: var(--red-500);
+    width: fit-content;
+    height: 37px;
+    justify-content: left;
+    justify-items: start;
+    align-items: start;
+    padding: 5px 15px;
+    margin: 7px;
+    border: none;
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--neutral-200);
+    text-align: center;
+    transition: 0.25s ease;
 }
+
+.warning-button:hover {
+    translate: 0px -2px;
+    padding: 8px 18px;
+}
+
+.warning-button:active {
+    transition: 0.06s;
+    translate: 0px 5px;
+}
+
+.primary-button {
+    border-radius: 10px;
+    background-color: var(--green-500);
+    width: fit-content;
+    height: 37px;
+    justify-content: left;
+    justify-items: start;
+    align-items: start;
+    padding: 5px 15px;
+    margin: 7px;
+    border: none;
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--green-1100);
+    text-align: center;
+    transition: 0.25s ease;
+}
+
+.primary-button:hover {
+    translate: 0px -2px;
+    padding: 8px 18px;
+    background-color: var(--green-600);
+}
+
+.primary-button:active {
+    transition: 0.06s;
+    translate: 0px 5px;
+    background-color: var(--green-700);
+}
+
+
+
+
+
 
 .note-card {
     position: relative;
@@ -251,6 +333,23 @@ h1 {
 
     text-decoration: underline;
     text-decoration-color: var(--green-900);
-    color: var(--green-900);
+    color: var(--bright-green-500);
 
+}
+
+.card {
+
+    background-color: var(--neutral-200);
+    color: var(--neutral-1200);
+    padding: 30px;
+    width: fit-content;
+    height: fit-content;
+    border-radius: 20px;
+    box-shadow: var(--light-shadow) 0px 25px 20px;
+    transition: 0.5s;
+
+}
+
+.card:hover {
+    padding: 40px;
 }

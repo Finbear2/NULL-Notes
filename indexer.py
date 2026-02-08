@@ -1,3 +1,5 @@
+from parser import cleanText
+from fileLoader import loadStopwords
 from pathlib import Path
 from models import Word
 from models import Note
@@ -29,29 +31,13 @@ def index(user):
                         
     return Notes, Words
         
-def indexSingular(Notes, Words, Filename, User):
+def indexSingular(Notes, Words, User):
     
-    notesFolder = Path(f"Notes/{User.name}")
-    
-    notesTry = Notes.get(Filename)      
-    
-    if notesTry:
-    
-        for word in Notes[Filename].words:
-        
-            for Word in Words:
-                    
-                if word == Word:
-                    
-                    if Filename in Words[word].notes:
-                        
-                        Words[Word].notes.remove(Filename)
-                                
-        Notes.pop(Filename, None)
+    notesFolder = Path(f"Notes/{User.name}")      
     
     for file in notesFolder.glob("*.md"):
         
-        if file.name == Filename:
+        if file.name not in Notes:
         
             Notes[file.name] = Note(file.read_text(encoding="utf-8"), file.name)
         
@@ -64,8 +50,18 @@ def indexSingular(Notes, Words, Filename, User):
                 else:
                     
                     tag = "important" if word.startswith("!") else None
-                    Words[word] = Word(word, tag, file.name)   
-                        
-                            
+                    Words[word] = Word(word, tag, file.name)
+        
+        else:
+            
+            note = Notes[file.name]
+            words = cleanText(file.read_text(encoding="utf-8"), loadStopwords())
+            
+            for word in words:
+                
+                if word not in note.words:
+                    
+                    note.words
+                                
                     
     return Notes, Words

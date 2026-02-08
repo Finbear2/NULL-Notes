@@ -2,24 +2,50 @@ from flask import url_for
 from fileLoader import loadStopwords
 from markupsafe import Markup
 from utils import normalizeWord
-import markdown
+from markdown_it import MarkdownIt
+from markdown_it.presets import gfm_like
+from linkify_it import LinkifyIt
+import mdit_py_plugins
+from mdit_py_plugins.front_matter import front_matter_plugin
+from mdit_py_plugins.footnote import footnote_plugin
+from mdit_py_plugins.tasklists import tasklists_plugin
+from mdit_py_plugins.deflist import deflist_plugin
+from mdit_py_plugins.field_list import fieldlist_plugin
+from mdit_py_plugins.texmath import texmath_plugin
+from mdit_py_plugins.subscript import sub_plugin
+from mdit_py_plugins.dollarmath import dollarmath_plugin
 import string
 import re
    
 def highlightHtml(text, user):
     
+    md =( MarkdownIt("gfm-like", {"linkify": True, "breaks": True})
+         .use(front_matter_plugin)
+         .use(footnote_plugin)
+         .use(tasklists_plugin, enabled=True, label=True)
+         .use(texmath_plugin)
+         .use(deflist_plugin)
+         .use(fieldlist_plugin)
+         .use(sub_plugin)
+         .use(dollarmath_plugin)
+         .enable("table")
+         .enable("linkify")
+         )
+    
+    html =  md.render(text)
     bufferWords = loadStopwords()
     
     words = []
     
-    parsedText = re.split(r'(\b[a-zA-Z]+\b)', text)
+    parsedText = re.findall(r'(<[^>]+>|[a-zA-Z]+|.)', html)
     
     for word in parsedText:
         
-        if word != "\n":
-            wordNorm = normalizeWord(word)
-        else:
-            wordNorm = "<br/>"
+        if "<" in word or "//" in word:
+            words.append(word)
+            continue
+        
+        wordNorm = normalizeWord(word)
         
         if wordNorm is not None and wordNorm.isalpha() and wordNorm not in bufferWords:
             
@@ -28,13 +54,11 @@ def highlightHtml(text, user):
             
         else:
             
-            words.append(word)
-            
+            words.append(word) 
+    
     text = "".join(map(str, words))
     
-    html = markdown.markdown(text, extensions=['extra', 'nl2br'])
-    
-    return Markup(html)
+    return Markup(text)
     
 # Function to clean text
 def cleanText(text, bufferWords):

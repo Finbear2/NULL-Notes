@@ -12,14 +12,21 @@
         <div class="column">
             <div class="topbar" style="z-index: 5;">
                 <div class="row">
-                    <button class="topbar-button" onclick="window.location.href='{{ url_for('edit', user=user.name, noteName=noteName) }}'">Edit</button>
+                    <button class="topbar-button" onclick="window.location.href='/{{ user.name }}/edit/{{ noteName }}'">Edit</button>
+                    <form method="post">
+                        <button type="submit" class="topbar-button">Delete</button>
+                    </form>
                 </div>
             </div>
             <div style="margin: 30px;">{{ noteText }}</div>
         </div>
     </div>
 
+    {% if result %}
+
     
+
+    {% endif %}
 
     {% include "sidebar.html" %}
 </body>

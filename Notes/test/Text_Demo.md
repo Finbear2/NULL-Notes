@@ -1,18 +1,36 @@
-# This is heading
+# This is a big heading
 ## This is a smaller heading
-### Small heading
-
+### This is an even smaller heading
+                    	
 ---
+This is a line /\
 
-Text
-**Bold Text**
-*Italic Text*
+This is normal text
+**This is bold text**
+*This is italic text*
 
- - This is a bullet point
- - [ ] This is a task
+First    
+Second
+Third
+Fouth :)
 
-`print("This is code")`
+ - Bullet point
+	 - Another bullet point
 
-> I did not break your child's ankle, they did it - My drama teacher 2025
+- [ ] This is an unfinished task
+- [x] This is a finished task 
 
-Docker
+
+> This is a quote - Me 2026
+
+`print("This is code!")`
+
+This is an emoji 😊
+
+ 1. First
+ 2. Second
+
+~~Text~~
+ 
+Here's a sentence [^1]
+[^1]: This is the footnote. 

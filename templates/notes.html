@@ -14,7 +14,7 @@
                 <div class="row">
                     <input type="text" id="search" placeholder="Search..."/>
                     <button class="topbar-button" onclick="window.location.href='{{ url_for('create', user=user.name) }}'">Make New Note</button>
-                    <form method="post">
+                    <form name="Index" method="post">
                         <button class="topbar-button" id="submit" type="submit">Re-Index</button>
                     </form>
                 </div>
