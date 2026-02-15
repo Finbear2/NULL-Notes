@@ -14,6 +14,7 @@ from mdit_py_plugins.field_list import fieldlist_plugin
 from mdit_py_plugins.texmath import texmath_plugin
 from mdit_py_plugins.subscript import sub_plugin
 from mdit_py_plugins.dollarmath import dollarmath_plugin
+from mdit_py_emoji import emoji_plugin
 import string
 import re
    
@@ -28,6 +29,7 @@ def highlightHtml(text, user):
          .use(fieldlist_plugin)
          .use(sub_plugin)
          .use(dollarmath_plugin)
+         .use(emoji_plugin)
          .enable("table")
          .enable("linkify")
          )
@@ -43,7 +45,18 @@ def highlightHtml(text, user):
         
         if "<" in word or "//" in word:
             words.append(word)
+            
             continue
+        elif word.startswith("!"):
+            
+            url = url_for('wordPage', user=user.name, word=word.lower())
+            words.append(f'<a href="{url}" class="uniqeWord"><i><b>{word}</b></i></a>')
+            
+            continue
+        elif word.lower() == "<card>":
+            words.append('<div class="card" style="margin: 20px;">')
+        elif word.lower() == "</card>":
+            words.append('</div>')
         
         wordNorm = normalizeWord(word)
         

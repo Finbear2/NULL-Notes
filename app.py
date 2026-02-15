@@ -126,11 +126,25 @@ def preview(user, noteName):
     # Check if the user exists
     if user:
         if noteName in user.notes:
+            
+            result=False
+            
+            if request.method == "POST":
+                formType = request.form.get("formType")
+                if formType == "delete":
+                    result=True
+                elif formType == "yes":
+                    os.remove(f"Notes/{user.name}/{noteName}")
+                    user.notes, user.words = index(user)
+                    return redirect(url_for("notesPage", notes=user.notes, user=user.name))
+                elif formType == "no":
+                    result = False    
+            
             note = user.notes[noteName] # Get note
             
             htmlText = highlightHtml(note.text, user) # Get the formated html code
     
-            return render_template("preview.html", noteText=htmlText, user=user, noteName=noteName )    
+            return render_template("preview.html", noteText=htmlText, user=user, noteName=noteName, result=result )    
         else:
             return render_template("error.html", message="Note not found, try a different going back and selecting it again or make sure you've spelt it correctly if typing url manually.", number="404")     
     else:
@@ -150,7 +164,6 @@ def edit(user, noteName):
             
             if request.is_json:
                 
-                print("REQUEST METHOD:", request.method, "FORM:", request.form, "JSON:", request.get_json())
                 print("Autosaving...")
         
                 data = request.get_json()

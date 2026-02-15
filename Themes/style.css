@@ -8,7 +8,7 @@
 
 *::-webkit-scrollbar-thumb {
     background-color: #888;
-    border-radius: 10px;
+    border-radius: 0px;
 }
 
 *::-webkit-scrollbar-thumb:hover {
@@ -26,6 +26,7 @@ body {
     font-weight: 400;
     background-color: var(--neutral-100);
     margin: 0px;
+    color: var(--neutral-1200);
 }
 
 input[type="checkbox"] {
@@ -33,7 +34,7 @@ input[type="checkbox"] {
     width: 15px;
     height: 15px;
     transition: 0.25s;
-    border-radius: 75px;
+    border-radius: 0px;
     opacity: 0.25;
 }
 
@@ -47,7 +48,7 @@ input[type="checkbox"]:checked {
 }
 
 input[type="text"] {
-    border-radius: 50px;
+    border-radius: 0px;
     background-color: var(--green-400);
     text-align: center;
     font-size: var(--font-size-body);
@@ -57,7 +58,7 @@ input[type="text"] {
     outline: none;
     border: none;
     margin: 7px;
-    color: var(--green-1100);
+    color: var(--neutral-1000);
     transition: 0.25s ease-out;
 }
 
@@ -102,7 +103,7 @@ h1 {
 
 /* These are your buttons */
 .sidebar-button {
-    border-radius: 5px;
+    border-radius: 0px;
     background-color: var(--neutral-200);
     width: 210px;
     height: 35px;
@@ -128,7 +129,7 @@ h1 {
 }
 
 .topbar-button {
-    border-radius: 5px;
+    border-radius: 0px;
     background-color: var(--neutral-200);
     width: fit-content;
     height: 37px;
@@ -155,7 +156,7 @@ h1 {
 }
 
 .warning-button {
-    border-radius: 10px;
+    border-radius: 0px;
     background-color: var(--red-500);
     width: fit-content;
     height: 37px;
@@ -183,7 +184,7 @@ h1 {
 }
 
 .primary-button {
-    border-radius: 10px;
+    border-radius: 0px;
     background-color: var(--green-500);
     width: fit-content;
     height: 37px;
@@ -222,7 +223,7 @@ h1 {
     width: 310px;
     height: 245px;
     background-color: var(--neutral-200);
-    border-radius: 20px;
+    border-radius: 0px;
     box-shadow: var(--light-shadow) 0px 4px 10px;
     white-space: nowrap;
     overflow: hidden;
@@ -233,6 +234,7 @@ h1 {
 
 .note-card:hover {
     background-color: var(--neutral-300);
+    padding: 10px;
 }
 
 .note-card:active {
@@ -248,7 +250,7 @@ h1 {
     position: fixed;
     top: 0;
     left: 0;
-    outline: 2px var(--neutral-400) solid;
+    outline: 2px var(--green-400) solid;
     height: 100vh;
     width: 244px;
     margin: 0px;
@@ -260,7 +262,7 @@ h1 {
 .topbar {
     width: calc(100vw);
     height: 54px;
-    outline: 2px var(--neutral-400) solid;
+    outline: 2px var(--green-400) solid;
     margin: 0px;
     padding: 0px;
     overflow-x: hidden;
@@ -269,9 +271,9 @@ h1 {
 }
 
 .icon {
-    border-radius: 5px;
+    border-radius: 0px;
     background-color: var(--green-500);
-    color: var(--green-1200);
+    color: var(--neutral-900);
     font-size: var(--font-h3-size);
     font-weight: var(--font-weight-bold);
     margin: 12px;
@@ -332,7 +334,7 @@ h1 {
 .uniqeWord {
 
     text-decoration: underline;
-    text-decoration-color: var(--brigh-green-500);
+    text-decoration-color: var(--green-900);
     color: var(--bright-green-500);
 
 }
@@ -344,7 +346,7 @@ h1 {
     padding: 30px;
     width: fit-content;
     height: fit-content;
-    border-radius: 20px;
+    border-radius: 0px;
     box-shadow: var(--light-shadow) 0px 25px 20px;
     transition: 0.5s;
 
